@@ -1,0 +1,214 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "email": "proveedor@demo.com",
+        "password": "demo123",
+        "firstName": "Juan",
+        "lastName": "Pérez",
+        "accountType": "provider",
+        "companyName": "Frutas y Verduras del Valle",
+        "address": "Av. Los Frutales 123, Lima",
+        "phone": "+51 987 654 321",
+        "ruc": "20123456789",
+        "createdAt": "2024-01-15T10:00:00.000Z"
+      },
+      {
+        "id": 2,
+        "email": "restaurante@demo.com",
+        "password": "demo123",
+        "firstName": "María",
+        "lastName": "García",
+        "accountType": "restaurant",
+        "restaurantName": "Restaurante El Sabor",
+        "address": "Jr. Los Sabores 456, Lima",
+        "phone": "+51 987 654 322",
+        "ruc": "20987654321",
+        "createdAt": "2024-01-15T10:00:00.000Z"
+      }
+    ],
+    "catalogs": [
+      {
+        "id": 1,
+        "userId": 1,
+        "name": "Frutas Frescas",
+        "category": "Frutas",
+        "published": true,
+        "createdAt": "2024-01-15T10:00:00.000Z"
+      },
+      {
+        "id": 2,
+        "userId": 1,
+        "name": "Verduras Orgánicas",
+        "category": "Verduras",
+        "published": true,
+        "createdAt": "2024-01-15T10:00:00.000Z"
+      }
+    ],
+    "products": [
+      {
+        "id": 1,
+        "catalogId": 1,
+        "name": "Manzana",
+        "quality": "Premium",
+        "quantity": 50,
+        "unit": "Kilogramo (kg)",
+        "price": 4.5
+      },
+      {
+        "id": 2,
+        "catalogId": 1,
+        "name": "Plátano",
+        "quality": "Premium",
+        "quantity": 30,
+        "unit": "Kilogramo (kg)",
+        "price": 2.8
+      },
+      {
+        "id": 3,
+        "catalogId": 1,
+        "name": "Naranja",
+        "quality": "Premium",
+        "quantity": 40,
+        "unit": "Kilogramo (kg)",
+        "price": 3.2
+      },
+      {
+        "id": 4,
+        "catalogId": 2,
+        "name": "Lechuga",
+        "quality": "Premium",
+        "quantity": 25,
+        "unit": "Unidad",
+        "price": 1.5
+      },
+      {
+        "id": 5,
+        "catalogId": 2,
+        "name": "Tomate",
+        "quality": "Premium",
+        "quantity": 35,
+        "unit": "Kilogramo (kg)",
+        "price": 3.8
+      }
+    ],
+    "lists": [
+      {
+        "id": 1,
+        "restaurantId": 2,
+        "name": "Lista de Helados",
+        "category": "Dulces",
+        "active": true,
+        "items": [
+          {
+            "id": 1,
+            "productId": 1,
+            "name": "Helado",
+            "quality": "Vainilla",
+            "quantity": 10,
+            "unit": "Unidad",
+            "price": 5.0,
+            "category": "Dulces"
+          }
+        ],
+        "createdAt": "2024-01-15T10:00:00.000Z"
+      }
+    ],
+    "orders": [
+      {
+        "id": 1,
+        "restaurantId": 2,
+        "restaurantName": "Restaurante El Sabor",
+        "providerId": 1,
+        "providerName": "Frutas y Verduras del Valle",
+        "items": [
+          {
+            "id": 1,
+            "productId": 1,
+            "name": "Manzana",
+            "quality": "Premium",
+            "quantity": 5,
+            "unit": "Kilogramo (kg)",
+            "price": 4.5,
+            "category": "Frutas"
+          },
+          {
+            "id": 2,
+            "productId": 4,
+            "name": "Lechuga",
+            "quality": "Premium",
+            "quantity": 3,
+            "unit": "Unidad",
+            "price": 1.5,
+            "category": "Verduras"
+          }
+        ],
+        "subtotal": 27.0,
+        "discount": 0,
+        "total": 27.0,
+        "promoCode": null,
+        "status": "pending",
+        "createdAt": "2024-06-24T10:00:00.000Z",
+        "lastUpdated": "2024-06-24T10:00:00.000Z"
+      }
+    ],
+    "invoices": [
+      {
+        "id": 1,
+        "orderId": 1,
+        "providerId": 1,
+        "restaurantId": 2,
+        "restaurantName": "Restaurante El Sabor",
+        "invoiceNumber": "F001-2024-0001",
+        "amount": 27.0,
+        "status": "pending",
+        "notes": "Factura por pedido de frutas y verduras",
+        "createdAt": "2024-06-24T11:00:00.000Z",
+        "dueDate": "2024-07-24T11:00:00.000Z",
+        "paidAt": null
+      }
+    ],
+    "promotions": [
+      {
+        "id": 1,
+        "providerId": 1,
+        "name": "Descuento de Verano",
+        "description": "15% de descuento en todas las frutas frescas durante el verano",
+        "type": "percentage",
+        "value": 15,
+        "startDate": "2024-06-01",
+        "endDate": "2024-08-31",
+        "minOrder": 50,
+        "maxDiscount": 20,
+        "code": "VERANO15",
+        "active": true,
+        "createdAt": "2024-05-15T10:00:00.000Z"
+      },
+      {
+        "id": 2,
+        "providerId": 1,
+        "name": "Descuento Fijo Verduras",
+        "description": "S/. 10 de descuento en pedidos de verduras superiores a S/. 100",
+        "type": "fixed",
+        "value": 10,
+        "startDate": "2024-06-01",
+        "endDate": "2024-12-31",
+        "minOrder": 100,
+        "maxDiscount": null,
+        "code": "VERDURAS10",
+        "active": true,
+        "createdAt": "2024-06-10T10:00:00.000Z"
+      }
+    ],
+    "settings": {
+      "initialized": true,
+      "version": "1.0.0",
+      "lastBackup": "2024-06-24T10:00:00.000Z",
+      "features": {
+        "invoicing": true,
+        "promotions": true,
+        "tracking": true,
+        "reports": true
+      }
+    }
+  }

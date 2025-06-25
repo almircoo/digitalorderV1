@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitalOrder - Conectando Restaurantes con Proveedores</title>
+    <link rel="icon" type="image/png" href="./images/favicon.svg">
+    <!-- meta description -->
+    <meta name="description" content="DigitalOrder es una plataforma que conecta restaurantes con proveedores para facilitar la compra y venta de productos.">
+    <!-- meta keywords -->
+    <meta name="keywords" content="DigitalOrder, restaurantes, proveedores, compra, venta, productos">
+    <!-- meta author -->
+    <meta name="author" content="EFESRT I - Group - 05 - 2025">
+    <!-- meta robots -->
+    <meta name="robots" content="index, follow">
+    <!-- meta google -->
+    <meta name="google" content="notranslate">
+    <!-- meta viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- meta apple -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="./css/styles.css">
+    
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" onclick="showHome()">DigitalOrder</a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar productos..." id="globalSearch">
+                    <!-- <i data-lucide="search"></i> -->
+                </div>
+                <div class="header-actions">
+                    <div class="cart-icon" onclick="showCart()">
+                        <i data-lucide="shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                    <div id="authButtons">
+                        <button class="btn btn-outline" onclick="showLogin()">Login</button>
+                        <button class="btn btn-primary" onclick="showRegister()">Register</button>
+                    </div>
+                    <div id="userMenu" class="btn btn-outline" style="display: none;">
+                        <span id="userName"></span>
+                        <!-- <button class="btn btn-outline" onclick="logout()">
+                            <i data-lucide="log-out"></i>
+                            Cerrar Sesión
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home page-->
+    <div id="landingPage" class="container">
+        <section class="hero">
+            <h1>From <span>fresh produce</span> to daily essentials, shop smarter!</h1>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="showApp()">Get the app</button>
+                <button class="btn btn-outline">Discover app</button>
+            </div>
+            <div class="hero-rating">
+                <span>⭐⭐⭐⭐⭐ Loved by 2.4M users with a 4.8 rating</span>
+            </div>
+            <div class="hero-image">
+                <img src="https://img.freepik.com/premium-photo/woman-shopping-groceries-supermarket-with-shopping-basket-her-hand_604472-14946.jpg" alt="Shopping">
+                <div class="feature-card left">
+                    <h3>Subscription Services</h3>
+                    <p>Sign up for automatic deliveries of your most-used items, saving you time and hassle.</p>
+                </div>
+                <div class="feature-card right">
+                    <h3>Italian Carbonara</h3>
+                    <p>6 products - 30 min</p>
+                    <span>+4</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard">
+        <div class="container">
+            <div class="dashboard-layout">
+                <aside class="sidebar">
+                    <div class="user-info">
+                        <h3 id="dashboardUserName"></h3>
+                        <p id="dashboardUserType"></p>
+                    </div>
+                    <nav>
+                        <ul class="nav-menu" id="navMenu">
+                            <!-- aqui se cargan los items del menu -->
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="main-content" id="mainContent">
+                    <!-- aqui se carga el contenido de la pagina de proveedor o restaurante-->
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Page -->
+    <div id="cartPage" class="cart-page">
+        <div class="container">
+            <button class="btn btn-outline" onclick="showDashboard()" style="margin-bottom: 20px;">
+                <i data-lucide="arrow-left"></i>
+                Volver al dashboard
+            </button>
+            <h2>Carrito de Compras</h2>
+            <div id="cartContent">
+                <!-- aqui se carga el contenido del carrito -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Page -->
+    <div id="checkoutPage" class="checkout-page">
+        <div class="container">
+            <button class="btn btn-outline" onclick="showCart()">
+                <i data-lucide="arrow-left"></i>
+                Volver al carrito
+            </button>
+            <h2>Finalizar Compra</h2>
+            <div class="checkout-grid" id="checkoutContent">
+                <!-- aqui se carga el contenido de la pagina de checkout -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login</h2>
+                <button class="modal-close" onclick="closeModal('loginModal')">&times;</button>
+            </div>
+            <p>Ingrese sus credenciales para acceder a su cuenta</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Correo</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Cuenta</label>
+                    <select name="accountType" required>
+                        <option value="restaurant">Restaurant</option>
+                        <option value="provider">Proveedor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="remember"> Recordar
+                    </label>
+                    <a href="#" style="float: right;">¿Olvidaste tu contraseña?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Iniciar Sesión</button>
+            </form>
+            <p style="text-align: center; margin-top: 20px;">
+                ¿Aún no tienes cuenta? <a href="#" onclick="showRegister()">Regístrate</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create an account</h2>
+                <button class="modal-close" onclick="closeModal('registerModal')">&times;</button>
+            </div>
+            <div class="form-tabs">
+                <button class="form-tab active" onclick="switchTab('restaurant')">Restaurant</button>
+                <button class="form-tab" onclick="switchTab('provider')">Proveedor</button>
+            </div>
+            <form id="registerForm">
+                <input type="hidden" name="accountType" value="restaurant">
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input type="text" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirmar Contraseña</label>
+                    <input type="password" name="confirmPassword" required>
+                </div>
+                <div id="restaurantFields">
+                    <h3>Restaurant Information</h3>
+                    <div class="form-group">
+                        <label>Nombre del Restaurante</label>
+                        <input type="text" name="restaurantName">
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input type="text" name="address">
+                    </div>
+                    <div class="form-group">
+                        <label>Número de Teléfono</label>
+                        <input type="tel" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label>RUC del Restaurante</label>
+                        <input type="text" name="ruc">
+                    </div>
+                </div>
+                <div id="providerFields" style="display: none;">
+                    <h3>Provider Information</h3>
+                    <div class="form-group">
+                        <label>Nombre de la Empresa</label>
+                        <input type="text" name="companyName">
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input type="text" name="companyAddress">
+                    </div>
+                    <div class="form-group">
+                        <label>Número de Teléfono</label>
+                        <input type="tel" name="companyPhone">
+                    </div>
+                    <div class="form-group">
+                        <label>RUC de la Empresa</label>
+                        <input type="text" name="companyRuc">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmacion -->
+    <div id="confirmModal" class="modal" style="display: none;">
+        <div class="modal-content small-modal">
+            <div class="modal-header">
+                <h2>Confirmación</h2>
+                <button class="modal-close" onclick="closeConfirmModal()">&times;</button>
+            </div>
+            <p id="confirmModalMessage" style="text-align: center; margin-bottom: 20px;"></p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button type="button" class="btn btn-outline" onclick="closeConfirmModal()">No</button>
+                <button type="button" class="btn btn-primary" id="confirmModalYesBtn">Sí</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Archivos JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    <!-- Scripts de la aplicacion -->
+    <script src="./js/data-service.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/catalog.js"></script>
+    <script src="./js/restaurant.js"></script>
+    <script src="./js/invoice.js"></script>
+    <script src="./js/app.js"></script>
+
+</body>
+</html>
