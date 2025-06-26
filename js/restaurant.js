@@ -23,7 +23,7 @@ async function loadRestaurantData() {
   try {
     lists = await dataService.getLists();
     orders = await dataService.getOrders();
-    
+
     // Cargar carrito desde localStorage (sesión específica)
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
@@ -47,10 +47,10 @@ function saveCartToStorage() {
  */
 async function showLists() {
   if (!isRestaurant()) return;
-  
+
   updateActiveMenuItem("nav-lists");
   await loadRestaurantData();
-  
+
   const content = document.getElementById("mainContent");
   const userLists = lists.filter((l) => l.restaurantId === currentUser.id);
 
@@ -79,7 +79,7 @@ async function showLists() {
                     <p>Productos: ${list.items ? list.items.length : 0}</p>
                     <div class="list-actions">
                         <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); viewListDetails(${list.id})">Ver Detalles</button>
-                        
+
                         <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation(); editList(${list.id})"><i data-lucide="edit"></i></button>
                         <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); deleteList(${list.id})"><i data-lucide="trash"></i></button>
                     </div>
@@ -157,7 +157,7 @@ function renderListContentItems(listId) {
                 (item) => `
                 <tr>
                     <td>${item.name} (${item.quality})</td>
-                    <td><input type="number" value="${item.quantity}" class="product-input" style="width: 80px;" 
+                    <td><input type="number" value="${item.quantity}" class="product-input" style="width: 80px;"
                                onchange="updateListItemQuantity(${list.id}, ${item.id}, this.value)"></td>
                     <td>${item.unit}</td>
                     <td>S/. ${item.price.toFixed(2)}</td>
@@ -218,7 +218,7 @@ function createNewList() {
                     </div>
                     <div class="category-item" data-category="Dulces">
                         <i data-lucide="candy"></i>
-                        <span>Dulces</span> 
+                        <span>Dulces</span>
                     </div>
                     <div class="category-item" data-category="Otros">
                         <i data-lucide="package"></i>
@@ -229,7 +229,7 @@ function createNewList() {
             </div>
             <div class="form-group">
                 <label>
-                    <input type="checkbox" name="active" checked> Lista Activa  
+                    <input type="checkbox" name="active" checked> Lista Activa
                 </label>
             </div>
             <div style="display: flex; gap: 10px; justify-content: flex-end;">
@@ -266,7 +266,7 @@ async function saveList(event) {
 
   try {
     const newList = await dataService.createList(listData);
-    
+
     if (newList) {
       event.target.closest(".modal").remove();
       await showLists();
@@ -284,11 +284,11 @@ async function saveList(event) {
 async function updateListItemQuantity(listId, itemId, newQuantity) {
   const list = lists.find((l) => l.id === listId);
   if (!list) return;
-  
+
   const item = list.items.find((i) => i.id === itemId);
   if (item) {
     item.quantity = parseInt(newQuantity);
-    
+
     try {
       await dataService.updateList(listId, { items: list.items });
       await loadRestaurantData();
@@ -308,9 +308,9 @@ async function removeListItem(listId, itemId) {
   showConfirmModal("¿Está seguro de eliminar este producto de la lista?", async () => {
     const list = lists.find((l) => l.id === listId);
     if (!list) return;
-    
+
     list.items = list.items.filter((item) => item.id !== itemId);
-    
+
     try {
       await dataService.updateList(listId, { items: list.items });
       await loadRestaurantData();
@@ -449,7 +449,7 @@ function editList(listId) {
             </div>
             <div class="form-group">
                 <label>
-                    <input type="checkbox" name="active" ${list.active ? "checked" : ""}> Lista Activa  
+                    <input type="checkbox" name="active" ${list.active ? "checked" : ""}> Lista Activa
                 </label>
             </div>
             <div style="display: flex; gap: 10px; justify-content: flex-end;">
@@ -461,7 +461,7 @@ function editList(listId) {
   `;
   document.body.appendChild(modal);
   lucide.createIcons();
-  
+
   modal.querySelectorAll("#editListCategoryGrid .category-item").forEach((item) => {
     item.addEventListener("click", (event) => {
       selectCategory(event.currentTarget, event.currentTarget.dataset.category);
@@ -530,7 +530,7 @@ async function browseProducts() {
   try {
     const allCatalogs = await dataService.getCatalogs();
     const allProducts = await dataService.getProducts();
-    
+
     const modal = document.createElement("div");
     modal.className = "modal";
     modal.style.display = "flex";
@@ -541,7 +541,7 @@ async function browseProducts() {
               <button class="modal-close" onclick="this.closest('.modal').remove()">&times;</button>
           </div>
           <div style="margin-bottom: 20px;">
-              <input type="text" placeholder="Buscar productos..." class="product-input" 
+              <input type="text" placeholder="Buscar productos..." class="product-input"
                      onkeyup="searchProducts(this.value)" style="width: 100%;">
           </div>
           <div class="category-grid" id="browseProductCategoryGrid" style="margin-bottom: 20px;">
@@ -581,7 +581,7 @@ async function browseProducts() {
     `;
     document.body.appendChild(modal);
     lucide.createIcons();
-    
+
     modal.querySelectorAll("#browseProductCategoryGrid .category-item").forEach((item) => {
       item.addEventListener("click", (event) => {
         filterProductsByCategory(event.currentTarget, event.currentTarget.dataset.category);
@@ -600,7 +600,7 @@ async function generateProductList(filterCategory = "all", searchTerm = "") {
   try {
     const allCatalogs = await dataService.getCatalogs();
     const allProducts = await dataService.getProducts();
-    
+
     const publishedCatalogs = allCatalogs.filter((c) => c.published !== false);
     let availableProducts = [];
 
@@ -620,7 +620,7 @@ async function generateProductList(filterCategory = "all", searchTerm = "") {
     }
 
     if (searchTerm) {
-      availableProducts = availableProducts.filter((p) => 
+      availableProducts = availableProducts.filter((p) =>
         p.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
@@ -672,7 +672,7 @@ async function filterProductsByCategory(element, category) {
  * Buscar productos
  */
 async function searchProducts(searchTerm) {
-  const selectedCategory = 
+  const selectedCategory =
     document.querySelector("#browseProductCategoryGrid .category-item.selected")?.dataset.category || "all";
   document.getElementById("productListContainer").innerHTML = await generateProductList(selectedCategory, searchTerm);
   lucide.createIcons();
@@ -785,7 +785,7 @@ function renderCart() {
           )
           .join("")}
     </div>
-    
+
     <div class="cart-summary">
         <h3>Resumen del Pedido</h3>
         <div class="summary-row">
@@ -853,18 +853,17 @@ async function processOrder() {
 
   try {
     const newOrder = await dataService.createOrder(orderData);
-    
+
     if (newOrder) {
       // Limpiar carrito
       cart = [];
       saveCartToStorage();
       updateCartCount();
-      
       // Limpiar promoción aplicada
       window.appliedPromo = null;
-      
+
       toastr.success("¡Pedido realizado exitosamente!");
-      showMyOrders();
+      showDashboard(); // redirige al dashboard
     }
   } catch (error) {
     console.error('Error al procesar pedido:', error);
@@ -877,10 +876,10 @@ async function processOrder() {
  */
 async function showMyOrders() {
   if (!isRestaurant()) return;
-  
+
   updateActiveMenuItem("nav-my-orders");
   await loadRestaurantData();
-  
+
   const content = document.getElementById("mainContent");
   const userOrders = orders.filter((o) => o.restaurantId === currentUser.id);
 
