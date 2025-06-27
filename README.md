@@ -83,11 +83,11 @@ project/
 - ✅ **Gestión de Pedidos**: Ver solicitudes, aceptar pedidos y actualizar estados
 - ✅ **Sistema de Promociones**: Crear códigos promocionales con descuentos
 - ✅ **Sistema de Facturación Completo**: 
-  - Crear facturas para pedidos completados
-  - Gestionar estados de factura (pendiente/pagada)
-  - Ver detalles completos de facturas
-  - Descargar facturas en PDF (simulado)
-  - Eliminar facturas cuando sea necesario
+- ✅ Crear facturas para pedidos completados
+- ✅ Gestionar estados de factura (pendiente/pagada)
+- ✅ Descargar facturas en PDF (simulado)
+- ✅ Ver detalles completos de facturas
+- ✅ Eliminar facturas cuando sea necesario
 - ✅ **Reportes y Analytics**: Visualizar estadísticas de ventas y rendimiento
 
 ### Para Restaurantes:
@@ -97,12 +97,12 @@ project/
 - ✅ **Realizar Pedidos**: Procesar pedidos con información de entrega y pago
 - ✅ **Seguimiento de Pedidos**: Monitorear el estado en tiempo real
 - ✅ **Sistema de Facturación Completo**:
-  - Ver todas las facturas recibidas
-  - Filtrar facturas por estado (todas/pendientes/pagadas)
-  - Buscar facturas por número, proveedor o pedido
-  - Ver detalles completos de facturas
-  - Procesar pagos de facturas pendientes
-  - Descargar facturas en PDF (simulado)
+- ✅ Ver todas las facturas recibidas
+- ✅ Filtrar facturas por estado (todas/pendientes/pagadas)
+- ✅ Buscar facturas por número, proveedor o pedido
+- ✅ Ver detalles completos de facturas
+- ✅ Procesar pagos de facturas pendientes
+- ✅ Descargar facturas en PDF (simulado)
 
 ## Implementación de Persistencia de Datos
 
