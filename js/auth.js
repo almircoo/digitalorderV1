@@ -132,6 +132,7 @@ function logout() {
   document.getElementById("authButtons").style.display = "flex";
   document.getElementById("userMenu").style.display = "none";
   toastr.info("Sesión cerrada");
+  history.pushState(null, '', '/');
 }
 
 /**

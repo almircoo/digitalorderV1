@@ -91,6 +91,8 @@ function closeModal(modalId) {
   function showHome() {
     hideAllPages();
     document.getElementById("landingPage").style.display = "block";
+    history.pushState(null, '', '/');
+    //window.location.reload();
   }
   
   function showDashboard() {
@@ -134,7 +136,7 @@ function closeModal(modalId) {
           <i data-lucide="user"></i> Mi cuenta
       </a></li>
       <li id="nav-logout">
-        <a href="#" onclick="logout()">
+        <a href="javascript:void(0)" onclick="logout()">
           <i data-lucide="log-out"></i> Cerrar sesión
       </a></li>
 
@@ -164,7 +166,7 @@ function closeModal(modalId) {
           <i data-lucide="user"></i> Mi cuenta
       </a></li>
       <li id="nav-logout">
-        <a href="#" onclick="logout()">
+        <a href="javascript:void(0)" onclick="logout()">
           <i data-lucide="log-out"></i> Cerrar sesión
       </a></li>
     `;

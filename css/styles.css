@@ -205,6 +205,7 @@
   .hero-image img {
     width: 100%;
     height: auto;
+    border-radius: 10px;
   }
   
   .feature-card {
@@ -1047,3 +1048,98 @@
     color: #25d366;
   }
   
+  /* estilos del footer */
+.footer {
+    width: 100%; /* w-full */
+    background-color: hsl(var(--background)); /* Lighter background for the footer itself */
+    color: hsl(var(--foreground)); /* Darker text color for better contrast */
+    padding: 4rem 1rem; /* Generous padding top/bottom, some side padding */
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+.footer-container {
+  max-width: 80rem; /* max-w-7xl */
+  margin-left: auto; /* mx-auto */
+  margin-right: auto; /* mx-auto */
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem; /* px-4 */
+}
+
+@media (min-width: 640px) { /* sm:px-6 */
+  .footer-container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) { /* lg:px-8 */
+  .footer-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+  }
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* grid-cols-1 */
+  gap: 2rem; /* gap-8 */
+  border-bottom: 1px solid hsl(var(--border)); /* border-b border-gray-300 */
+  padding-bottom: 2rem; /* pb-8 */
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+@media (min-width: 768px) { /* md:grid-cols-3 */
+  .footer-grid {
+      grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.footer-section-title {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600; /* font-semibold */
+  color: hsl(var(--foreground)); /* Darker color for titles */
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.footer-digitalorder p {
+  font-size: 0.875rem; /* text-sm */
+  color: hsl(var(--muted-foreground)); /* text-gray-600 */
+}
+
+.footer-contact-list,
+.footer-about-list {
+  list-style: none; /* Remove default list bullets */
+  padding: 0;
+  margin: 0;
+  font-size: 0.875rem; /* text-sm */
+}
+
+.footer-contact-list li,
+.footer-about-list li {
+  margin-bottom: 0.75rem; /* space-y-3 */
+}
+
+.footer-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Space between icon and text */
+}
+
+.footer-icon-text span {
+  color: hsl(var(--muted-foreground)); /* text-gray-500 */
+}
+
+.footer-link {
+  color: hsl(var(--muted-foreground)); /* Slightly lighter gray for links */
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-link:hover {
+  color: hsl(var(--foreground)); /* Darker on hover */
+}
+
+.footer-copyright {
+  text-align: center; /* text-center */
+  font-size: 0.75rem; /* text-xs */
+  color: hsl(var(--muted-foreground)); /* text-gray-600 */
+}
